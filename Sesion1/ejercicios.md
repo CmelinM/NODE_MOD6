@@ -5,7 +5,7 @@ Para practicar el uso de `stdin`, `stdout` y `stderr` se proponen las siguientes
 1. Manejo de errores: El programa tomará data de `stdin` y en caso que el tipo de dato no sea número, retornará un error.
 
 > [!NOTE]
-> `stdout` puede escribir información en consola al igual que `stdout`
+> `stderr` puede escribir información en consola al igual que `stdout`
 
 2. Contador de palabras: Crea un archivo wordcount.js que lea texto desde consola y cuente el número de palabras
 
