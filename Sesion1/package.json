@@ -1,0 +1,13 @@
+{
+  "name": "sesion1",
+  "version": "1.0.0",
+  "description": "Sesion 1 Node",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js",
+    "dev": "node --watch main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
