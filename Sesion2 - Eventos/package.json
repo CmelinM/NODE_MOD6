@@ -1,0 +1,15 @@
+{
+  "name": "sesion2---eventos",
+  "version": "1.0.0",
+  "description": "Manejo de eventos en Node",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "eventos"
+  ],
+  "author": "",
+  "license": "ISC"
+}

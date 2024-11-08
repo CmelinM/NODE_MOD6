@@ -1,0 +1,12 @@
+{
+  "name": "sistema_riego",
+  "version": "1.0.0",
+  "description": "Modelo de sistema de riegos",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Somos los mas bacanes",
+  "license": "ISC"
+}
