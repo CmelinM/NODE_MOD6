@@ -9,17 +9,16 @@ console.log(archivos)
 
 let extArchivos = [ '.txt', '.jpg' ]
 
-extArchivos.forEach(async ext => {
+for (let ext of extArchivos) {
   let directorioNuevo = ext.replace('.', '')
   try {
     await fs.access(path.posix.join(DIRECTORIO, directorioNuevo ))
-    
+
     console.log("El directorio existe")
   } catch (error) {
     await fs.mkdir(path.posix.join(DIRECTORIO, directorioNuevo))
   }
-
-})
+}
 
 // await fs.mkdir(path.posix.join(DIRECTORIO, 'txt'))
 
