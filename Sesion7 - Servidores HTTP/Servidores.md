@@ -58,9 +58,9 @@ Por convención existe una serie de códigos de estado que indican el estado de 
 
 Toda solicitud y respuesta HTTP tiene la misma estructura con dos partes: 
 
-- **Cabecera (*header*)**: Es un texto (string) terminado por una línea en blanco (`\n\n`) con dos partes:
+- **Cabecera (*header*)**: Es un texto (string) terminado por una línea en blanco (`\r\n\r\n`) con dos partes:
     
-    - **Primera Línea**:  Método de la solicitud, ruta al recurso, versión del protocolo.
+    - **Primera Línea**:  Método de la solicitud, ruta al recurso, versión del protocolo (`\r\n`).
     - **Bloque de parámetros**: Cada parámetro usa una sóla línea
 
 - **Cuerpo**: Parte reservada para los datos, se indica el tipo MIME enviado.
