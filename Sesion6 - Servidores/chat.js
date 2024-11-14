@@ -20,7 +20,10 @@ const server = net.createServer(socket => {
 
   socket.on('data', msg => {
     for(let cliente of clientes) {
-      cliente.write(`Respuesta: ${msg}`)
+      // cliente.write(`Respuesta: ${msg}`)
+      if(cliente != socket) {
+        cliente.write(`Respuesta: ${msg}`)
+      }
     }
   })
 })
