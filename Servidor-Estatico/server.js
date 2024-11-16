@@ -8,7 +8,7 @@ import * as fs from 'node:fs/promises'
 const port = process.argv[2] || 8080
 
 const respuesta = async (codeHTTP, mime, file) => {
-  const body = file ? file : Buffer.from(`<h1>Error</h1>`)
+  const body = file ? file : Buffer.from(`<h1>Error ${codeHTTP}</h1>`)
   const head = `HTTP/1.0 ${codeHTTP}\r\nContent-Type: ${mime}\r\nContent-Length: ${body.length}\r\n\r\n`
 
   return Buffer.concat([Buffer.from(head), body])
@@ -29,6 +29,12 @@ const server = net.createServer(socket => {
   socket.on('data', async data => {
     /**
      * Tomamos cabeceras y cuerpo de la solicitud
+     * Primera línea tiene el "Método"
+     * 
+     * GET -> Leer recursos
+     * POST -> Crear recursos
+     * PUT -> Actualizar
+     * DELETE -> Borrar
      */
     const [head, body] = data.toString().split('\r\n\r\n')
 
@@ -43,8 +49,12 @@ const server = net.createServer(socket => {
         const respuestaBuffer = await respuesta('200', 'text/html', htmlBuffer)
         socket.write(respuestaBuffer)
       } catch (error) {
-        
+        const respuestaBuffer = await respuesta('404', 'text/html')
+        socket.write(respuestaBuffer)
       }
+    } else {
+      const respuestaBuffer = await respuesta('400', 'text/html')
+      socket.write(respuestaBuffer)
     }
 
   })
