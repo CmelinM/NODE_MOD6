@@ -1,5 +1,9 @@
 /**
  * Servidor HTTP, sobre módulo net de node
+ * 
+ * Este servidor está hecho a modo de aprendizaje
+ * No tiene optimizado el cierre de socket cuando hay solicitudes recurrentes
+ * por parte del cliente
  */
 
 import * as net from 'node:net'
