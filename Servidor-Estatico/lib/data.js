@@ -10,6 +10,15 @@
 import * as fs from 'node:fs/promises'
 import * as path from 'node:path'
 
+
+/**
+ * Lee un archivo con formato JSON y retorna un objeto
+ *
+ * @async
+ * @param {string} folder - Nombre de carpeta
+ * @param {string} fileName - Nombre de archivo
+ * @returns {Promise<object>}
+ */
 export const readFile = async (folder, fileName) => {
   /**
    * descriptorArchivo -> Número que representa de forma única el archivo a manipular
@@ -24,7 +33,6 @@ export const readFile = async (folder, fileName) => {
 
     descriptorArchivo = await fs.open(filePath)
 
-    console.log("descriptor archivo readFile", descriptorArchivo)
     const data = await fs.readFile(descriptorArchivo, { encoding: 'utf8' })
     return JSON.parse(data)
   } catch (err) {
@@ -44,6 +52,9 @@ export const readFile = async (folder, fileName) => {
 
 /**
  * Crea documento con data inicial
+ * @param { string } folder - Indica la carpeta donde estará el documento
+ * @param { string } fileName - Nombre de archivo con extensión
+ * @param { object } data - Objeto JSON a almacenar
  */
 export const createFile = async (folder, fileName, data) => {
   /**
@@ -58,16 +69,28 @@ export const createFile = async (folder, fileName, data) => {
       console.log('Documento ya existía')
     }
   } catch (err) {
-    console.error(err)
-    await fs.writeFile(filePath, JSON.stringify(data), { encoding: 'utf8' })
-    console.log('Documento creado')
+    /**
+     * Manejando la creación del archivo en caso que no exista
+     */
+    try {
+      await fs.writeFile(filePath, JSON.stringify(data), { encoding: 'utf8' })
+      console.log('Documento creado')
+    } catch (err) {
+      console.error("Error creando archivo", err)
+    }
   }
 }
 
-// // @TODO eliminar prueba de createFile
-// let user = { telefono: 444444444, nombre: 'IT el payaso' }
-// createFile('.data/usuarios', `${user.telefono}.json`, user)
 
+/**
+ * Reescribe el contenido de un archivo
+ *
+ * @async
+ * @param { string } folder - Nombre de carpeta
+ * @param { string } fileName - Nombre de archivo
+ * @param { object } data - Contenido para reescribir
+ * @returns { Promise<void> }
+ */
 export const updateFile = async (folder, fileName, data) => {
   const filePath = path.join(folder, fileName)
   let descriptorArchivo
@@ -79,8 +102,9 @@ export const updateFile = async (folder, fileName, data) => {
     try {
       /**
        * Tratamos de escribir
+       * forzamos borrado con truncate
        */
-      console.log("descriptor archivo update", descriptorArchivo)
+      await descriptorArchivo.truncate(0)
       await fs.writeFile(descriptorArchivo, JSON.stringify(data), { encoding: 'utf8' })
     } catch (err) {
       console.error('Error escribiendo archivo', err)
@@ -95,17 +119,16 @@ export const updateFile = async (folder, fileName, data) => {
   }
 }
 
-// @TODO
-// Eliminar pruebas de update
-
-// let user = { telefono: 444444444, nombre: 'IT el payaso' }
-// console.log(await readFile('.data/usuarios', `${user.telefono}.json`))
-// user.nombre = 'Nuevo Nombre'
-// await updateFile('.data/usuarios', `${user.telefono}.json`, user)
-// console.log(await readFile('.data/usuarios', `${user.telefono}.json`))
 
 
-
+/**
+ * Borra archivo o acceso directo usando carpeta y nombre de archivo
+ *
+ * @async
+ * @param { string } folder - Nombre de carpeta como string
+ * @param { string } fileName - Nombre de archivo como string
+ * @returns { Promise.<void> }
+ */
 export const deleteFile = async (folder, fileName) => {
   try {
     let filePath = path.join(folder, fileName)
@@ -118,5 +141,3 @@ export const deleteFile = async (folder, fileName) => {
     console.error("Error eliminando archivo", err)
   }
 }
-let user = { telefono: 444444444, nombre: 'IT el payaso' }
-await deleteFile('.data/usuarios', `${user.telefono}.json`)
