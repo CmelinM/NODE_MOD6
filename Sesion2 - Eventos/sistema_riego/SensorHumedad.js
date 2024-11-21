@@ -24,7 +24,7 @@ class Sensor extends EventEmitter {
       } else if (HUMEDAD_IDEAL > this.macetero.humedad) {
         this.emit('poca_humedad')
       }
-    }, 10000)
+    }, 7000)
 
     this.intervaloId = intervalo
   }

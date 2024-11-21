@@ -11,7 +11,8 @@ import path from 'node:path'
  */
 
 // const CARPETA_DESCARGAS = 'c:\Users\user\Downloads'
-const CARPETA_DESCARGAS = '/Users/user/Downloads'
+// const CARPETA_DESCARGAS = '/Users/user/Downloads'
+const CARPETA_DESCARGAS = import.meta.dirname
 
 const ruta = path.posix.dirname(CARPETA_DESCARGAS)
 const base = path.posix.basename(CARPETA_DESCARGAS)
@@ -27,9 +28,18 @@ let archivos = files.filter(async file => {
   const fileUrl = path.posix.join(URL_DESCARGAS, file)
 
   let stats = await fs.stat(fileUrl)
-
+  
   return !stats.isDirectory()
 })
+
+let archivosPromises = files.map(async file => {
+  const fileUrl = path.posix.join(URL_DESCARGAS, file)
+  
+  return [await fs.stat(fileUrl), file]
+
+} )
+
+console.log((await Promise.all(archivosPromises)).map(data => [data, data[0].isDirectory()]))
 
 /**
  * Obtener extension de los archivos

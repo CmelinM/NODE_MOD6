@@ -11,5 +11,6 @@ let sensor = new Sensor(palto)
 sensor.on('muy_humedo', () => {console.log('Dentengan todo, la planta se ahoga')})
 sensor.on('poca_humedad', () => { sistemaRiego.regar() })
 
+// Se inician los modelos después de tener registrados los listeners
 sensor.encender()
 palto.iniciarModelo()
