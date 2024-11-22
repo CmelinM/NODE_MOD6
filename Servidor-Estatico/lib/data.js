@@ -61,23 +61,29 @@ export const createFile = async (folder, fileName, data) => {
    * Definimos ruta
    */
   const filePath = path.join(folder, fileName)
+  let creado
   try {
     const descriptorArchivo = await fs.open(filePath)
     if(descriptorArchivo) {
 
       descriptorArchivo.close()
       console.log('Documento ya existía')
+      creado = false
     }
   } catch (err) {
     /**
      * Manejando la creación del archivo en caso que no exista
      */
     try {
-      await fs.writeFile(filePath, JSON.stringify(data), { encoding: 'utf8' })
+      await fs.writeFile(filePath, JSON.stringify(data, null, 2), { encoding: 'utf8' })
       console.log('Documento creado')
+      creado = true
     } catch (err) {
       console.error("Error creando archivo", err)
+      creado = false
     }
+  } finally {
+    return creado
   }
 }
 

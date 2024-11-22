@@ -15,10 +15,14 @@ class UserModel {
   static folder = '.data/usuarios'
 
   static async create(userId, data) {
+    let estado
     try {
-      await createFile(UserModel.folder, `${userId}.json`, data)
+      estado = await createFile(UserModel.folder, `${userId}.json`, data)
     } catch (err) {
       console.error("Error Creando Usuario", err)
+      estado = false
+    } finally {
+      return estado
     }
   }
 
