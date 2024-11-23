@@ -2,8 +2,7 @@
  * Tiene como responsabilidad el manejo HTTP de los usuarios
  */
 
-import { fileExists } from "../lib/data.js"
-import { isValidUser, isValidUser as userWithRequiredParams } from "../lib/validations.js"
+import { isValidUser, userWithRequiredParams } from "../lib/validations.js"
 import { UserModel } from "../models/userModel.js"
 import * as path from 'node:path'
 
