@@ -147,3 +147,16 @@ export const deleteFile = async (folder, fileName) => {
     console.error("Error eliminando archivo", err)
   }
 }
+
+export const fileExists = async(folder, fileName) => {
+  let filePath = path.join(folder, fileName)
+  try {
+    await fs.access(filePath);
+
+    console.log(`El archivo "${filePath}" existe.`);
+    return true;
+  } catch {
+    console.log(`El archivo "${filePath}" no existe.`);
+    return false;
+  }
+}

@@ -5,7 +5,7 @@
 /**
  * Dependencias, lib/data.js que se comunica con FS
  */
-import { createFile, deleteFile, updateFile, readFile } from "../lib/data.js";
+import { createFile, deleteFile, updateFile, readFile, fileExists } from "../lib/data.js";
 
 /**
  * Class UserModel que define las acciones de los usuarios en el FS
@@ -67,6 +67,15 @@ class UserModel {
       console.error("No se pudo obtener al usuario", err)
     }
   }
+
+  static async exists(userId) {
+    try {
+      let status = await fileExists(UserModel.folder, `${userId}.json`)
+      return status
+    } catch (err) {
+      console.error(err)
+    }
+  } 
 }
 
 export { UserModel }
