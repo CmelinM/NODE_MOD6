@@ -29,6 +29,8 @@ export const isValidUser = (userObject) => {
   console.log("Llaves aceptadas", llavesUsuario)
   console.log(userObject)
 
+  
+
   let traeLlavesValidas = llavesObjeto.every(llave => llavesUsuario.includes(llave))
   return traeLlavesValidas
 }
