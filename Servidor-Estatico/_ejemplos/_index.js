@@ -3,11 +3,11 @@
  */
 
 import * as http from 'node:http'
-import { createFile } from './lib/data.js'
+import { createFile } from '../lib/data.js'
 import path from 'node:path'
 import * as fs from 'node:fs/promises'
 import * as mime from 'mime-types'
-import { userController } from './controllers/userController.js'
+import { userController } from '../controllers/userController.js'
 
 const port = process.argv[2] || 3000
 

@@ -9,7 +9,13 @@
  * @return { boolean }
  */
 export const userWithRequiredParams = (userObject)  => {
-  const llavesMinimasValidas = [ 'telefono', 'nombre', 'apellido', 'EULA' ]
+  const llavesMinimasValidas = [ 
+    'telefono', 
+    'nombre', 
+    'apellido', 
+    'EULA' 
+  ]
+
   let llavesObjeto = Object.keys(userObject)
   const traeLlavesMinimas = llavesObjeto.every(llave => llavesMinimasValidas.includes(llave))
 

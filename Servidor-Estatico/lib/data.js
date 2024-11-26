@@ -125,8 +125,6 @@ export const updateFile = async (folder, fileName, data) => {
   }
 }
 
-
-
 /**
  * Borra archivo o acceso directo usando carpeta y nombre de archivo
  *
