@@ -158,3 +158,7 @@ export const fileExists = async(folder, fileName) => {
     return false;
   }
 }
+
+export const listAll = async(folder) => {
+  
+}

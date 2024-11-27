@@ -8,7 +8,7 @@
  * Valida que el usuario tenga los parametros mínimos para ser creado
  */
 
-import { userWithRequiredParams } from "../../lib/validations.js"
+import { userWithRequiredParams, validarTelefono } from "../../lib/validations.js"
 
 describe('Testing de validacines de usuarios', () => {
   test('Retorna falso si EULA no es true', () => {
@@ -24,21 +24,21 @@ describe('Testing de validacines de usuarios', () => {
   
   test('Retorna false si el teléfono sólo tiene numeros', () => {
     let validUser = {
-      telefono: 8768454687,
+      telefono: 123456789,
       nombre: 'Pepe',
       apellido: 'Cortizona',
       EULA: true
     }
     
     let invalidUser = {
-      telefono: "amar azul9876546",
+      telefono: "amarazul9",
       nombre: 'Carlitos',
       apellido: 'Lechuga',
       EULA: true
     }
     
-    expect(userWithRequiredParams(validUser)).toBe(true)
-    expect(userWithRequiredParams(invalidUser)).toBe(false)
+    expect(validarTelefono(validUser.telefono)).toBe(true)
+    expect(validarTelefono(invalidUser.telefono)).toBe(false)
   })
   
   test('retorna true si el usuario lleva más datos que los mínimos', () => {
@@ -60,12 +60,12 @@ describe('Testing de validacines de usuarios', () => {
       EULA: true
     }
 
-    expect(userWithRequiredParams(invalidUser)).toBe(true)
+    expect(userWithRequiredParams(invalidUser)).toBe(false)
   })
   
   test('El teléfono es válido', () => {
     let validUser = {
-      telefono: 987654321,
+      telefono: 123456789,
       nombre: 'Pepe',
       apellido: 'Cortizona',
       email: 'pepe@cortizona.cl',
@@ -79,7 +79,7 @@ describe('Testing de validacines de usuarios', () => {
       EULA: true
     }
     let invalidUser2 = {
-      telefono: 987654365421,
+      telefono: 9876543654210654,
       nombre: 'Pepe',
       apellido: 'Cortizona',
       email: 'pepe@cortizona.cl',
@@ -87,9 +87,9 @@ describe('Testing de validacines de usuarios', () => {
     }
 
     // Debe tener 9 dígitos
-    expect(userWithRequiredParams(validUser)).toBe(true)
-    expect(userWithRequiredParams(invalidUser1)).toBe(false)
-    expect(userWithRequiredParams(invalidUser2)).toBe(false)
+    expect(validarTelefono(validUser.telefono)).toBe(true)
+    expect(validarTelefono(invalidUser1.telefono)).toBe(false)
+    expect(validarTelefono(invalidUser2.telefono)).toBe(false)
   })
 })
 

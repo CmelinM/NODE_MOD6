@@ -17,9 +17,20 @@ export const userWithRequiredParams = (userObject)  => {
   ]
 
   let llavesObjeto = Object.keys(userObject)
-  const traeLlavesMinimas = llavesObjeto.every(llave => llavesMinimasValidas.includes(llave))
+  const traeLlavesMinimas = llavesMinimasValidas.every(llave => llavesObjeto.includes(llave))
 
-  return traeLlavesMinimas && userObject["EULA"] == true && llavesObjeto.length == llavesMinimasValidas.length
+  return traeLlavesMinimas && userObject["EULA"] == true
+}
+
+/**
+ * Validate phone
+ */
+export const validarTelefono = (phone) => {
+  const longitud = phone.toString().length == 9
+  let regex = /\d{9}/
+  const soloDigitos = regex.test(phone.toString())
+
+  return longitud && soloDigitos
 }
 
 /**

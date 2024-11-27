@@ -68,6 +68,13 @@ class UserModel {
     }
   }
 
+  static async getAll() {
+    /**
+     * Usando lib/data.js obtener todos los usuraios
+     */
+    
+  }
+
   static async exists(userId) {
     try {
       let status = await fileExists(UserModel.folder, `${userId}.json`)

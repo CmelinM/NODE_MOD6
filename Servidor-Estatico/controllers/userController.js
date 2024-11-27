@@ -117,4 +117,13 @@ export const userController = async (req, res, payloadEnBruto, urlParts) => {
       res.end("Solicitud mal hecha")
     }
   }
+
+  /**
+   * GET /api/users -> listar todos los usuarios
+   */
+  else if(req.method == 'GET' && !urlParts[2]) {
+    /**
+     * Enlistar los usuarios de la carpeta .data/users
+     */
+  }
 }
