@@ -5,6 +5,7 @@
 import { userController } from "./controllers/userController.js"
 import { publicController } from "./controllers/publicController.js"
 import { productsController } from "./controllers/productsController.js"
+import { beatlesController } from "./controllers/beatlesController.js"
 
 export const router = (req, res) => {
   const url = req.url
@@ -35,6 +36,13 @@ export const router = (req, res) => {
      */
     else if (urlParts[0] == 'api' && urlParts[1] == 'productos') {
       productsController(req, res, payloadBruto, urlParts)
+    }
+    /**
+     * Ruta Beatles
+     * localhost:3000/api/beatles
+     */
+    else if (urlParts[0] == 'api' && urlParts[1] == 'beatles') {
+      beatlesController(req, res, payloadBruto, urlParts)
     }
     /**
      * 404 not found

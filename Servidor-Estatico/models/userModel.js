@@ -5,7 +5,7 @@
 /**
  * Dependencias, lib/data.js que se comunica con FS
  */
-import { createFile, deleteFile, updateFile, readFile, fileExists } from "../lib/data.js";
+import { createFile, deleteFile, updateFile, readFile, fileExists, listAll } from "../lib/data.js";
 
 /**
  * Class UserModel que define las acciones de los usuarios en el FS
@@ -72,7 +72,9 @@ class UserModel {
     /**
      * Usando lib/data.js obtener todos los usuraios
      */
-    
+    let usersWithExtension = await listAll(UserModel.folder)
+    let users = usersWithExtension.map(user => user.split('.')[0])
+    return users
   }
 
   static async exists(userId) {

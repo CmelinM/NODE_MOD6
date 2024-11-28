@@ -160,5 +160,10 @@ export const fileExists = async(folder, fileName) => {
 }
 
 export const listAll = async(folder) => {
-  
+  try {
+    const directories = await fs.readdir(folder/*, { withFileTypes: true } */);
+    return directories
+  } catch (err) {
+    console.error(err)
+  }
 }

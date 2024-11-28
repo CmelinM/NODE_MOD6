@@ -1,0 +1,37 @@
+{
+  "1": {
+    "titulo": "Please Please Me",
+    "anio": 1963,
+    "canciones": ["I Saw Her Standing There", "Twist and Shout", "Love Me Do"]
+  },
+  "2": {
+    "titulo": "A Hard Day's Night",
+    "anio": 1964,
+    "canciones": ["Can't Buy Me Love", "A Hard Day's Night", "And I Love Her"]
+  },
+  "3": {
+    "titulo": "Rubber Soul",
+    "anio": 1965,
+    "canciones": ["Norwegian Wood", "In My Life", "Drive My Car"]
+  },
+  "4": {
+    "titulo": "Revolver",
+    "anio": 1966,
+    "canciones": ["Eleanor Rigby", "Yellow Submarine", "Here, There and Everywhere"]
+  },
+  "5": {
+    "titulo": "Sgt. Pepper's Lonely Hearts Club Band",
+    "anio": 1967,
+    "canciones": ["Lucy in the Sky with Diamonds", "A Day in the Life", "With a Little Help from My Friends"]
+  },
+  "6": {
+    "titulo": "The White Album",
+    "anio": 1968,
+    "canciones": ["While My Guitar Gently Weeps", "Blackbird", "Back in the U.S.S.R."]
+  },
+  "7": {
+    "titulo": "Abbey Road",
+    "anio": 1969,
+    "canciones": ["Come Together", "Here Comes the Sun", "Something"]
+  }
+}

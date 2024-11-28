@@ -125,5 +125,11 @@ export const userController = async (req, res, payloadEnBruto, urlParts) => {
     /**
      * Enlistar los usuarios de la carpeta .data/users
      */
+    let users = await UserModel.getAll()
+
+    if(users.length > 0) {
+      res.writeHead(200, 'OK', { "content-type": "application/json" })
+      res.end(JSON.stringify(users))
+    }
   }
 }
