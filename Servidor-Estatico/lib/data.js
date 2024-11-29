@@ -1,7 +1,7 @@
 /**
  * Librería para Data
  * 
- * Permitir operaciones de (CRUD) al FS
+ * Permitir operaciones de lectura escritura al FS
  * 
  * Actuará sobre carpeta oculta ".data/"
  * Todos los archivos tienen la extensión ".json"

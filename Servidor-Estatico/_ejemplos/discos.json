@@ -1,0 +1,15 @@
+{
+  "1": {
+    "titulo": "Please Please Me",
+    "anio": 1963,
+    "canciones": ["I Saw Her Standing There", "Twist and Shout", "Love Me Do"]
+  },
+  "2": {
+    "titulo": "A Hard Day's Night",
+    "anio": 1964,
+    "canciones": ["Can't Buy Me Love", "A Hard Day's Night", "And I Love Her"]
+  },
+  "titulo": "A Hard Day's Night",
+  "anio": 1964,
+  "canciones": ["Can't Buy Me Love", "A Hard Day's Night", "And I Love Her"]
+}

@@ -26,4 +26,14 @@ export class BeatlesModel {
 
     return discos[id]
   }
+
+  static async createAndUpdateDisc(discos) {
+    try {
+      await updateFile(BeatlesModel.folder, BeatlesModel.fileName, discos)
+      return true
+    } catch (error) {
+      console.error(error)
+      return false
+    }
+  }
 }

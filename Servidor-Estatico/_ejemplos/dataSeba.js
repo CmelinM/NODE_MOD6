@@ -12,13 +12,26 @@ export const readFile = async (folder, fileName) => {
     const data = await fs.readFile(descriptorArchivo, "utf8");
     return JSON.parse(data);
   } catch (err) {
-    /**     * Enviamos error a consola     */ 
+    /**     * Enviamos error a consola     */
     console.error(err);
   } finally {
-    /**     * Cerramos archivo     */ 
+    /**     * Cerramos archivo     */
     if (descriptorArchivo) {
       await descriptorArchivo.close();
     }
   }
 }; // @TODO eliminar prueba del readFile
-console.log(await readFile('.data/usuarios', '987654312.json'));
+console.log(await readFile(".data/usuarios", "987654312.json"));
+
+class algo {
+  static async createDisc(id, data) {
+    try {
+      let discos = await BeatlesModel.getAll();
+      discos[id] = data;
+      await updateFile(BeatlesModel.folder, BeatlesModel.fileName, discos);
+      console.log("Disco creado correctamente.");
+    } catch (error) {
+      console.error("Error al crear el disco", error);
+    }
+  }
+}
