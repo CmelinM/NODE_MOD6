@@ -9,8 +9,21 @@ import { beatlesController } from "./controllers/beatlesController.js"
 
 export const router = (req, res) => {
   const url = req.url
-  const urlParts = url.split('/').filter(part => !!part)
-
+  const urlParts = url.split('/').filter(part => !!part).map(part => part.split('?')[0])
+  /**
+   * https:// -> protocolo
+   * localhost -> dominio (servidor)
+   * :3000 -> puerto 
+   * ruta/al/recurso -> ruta
+   * ?query=seach -> texto de consulta
+   * 
+   * http://localhost:3000/api/beatles?name=white....
+   * let _url = new URL(req.url, `https://${req.headers.host}`)
+   * let queryParams = _url.searchParams
+   * console.log(queryParams)
+   * console.log(urlParts)
+    */
+  /** */
   let payloadBruto = '' // @todo generar payload desde evento data
 
   req.on('data', chunk => {
@@ -21,12 +34,13 @@ export const router = (req, res) => {
     /**
      * /public
      */
-    console.log(req.method, req.url)
     if(urlParts[0] != 'api') {
       publicController(req, res, urlParts)
     } 
     /**
      * Ruta API Usuarios
+     * /api/users
+     * urlParts = ["api", "users"]
      */
     else if ( urlParts[0] == 'api' && urlParts[1] == 'users' ) {
       userController(req, res, payloadBruto, urlParts)
@@ -41,6 +55,7 @@ export const router = (req, res) => {
      * Ruta Beatles
      * localhost:3000/api/beatles
      */
+
     else if (urlParts[0] == 'api' && urlParts[1] == 'beatles') {
       beatlesController(req, res, payloadBruto, urlParts)
     }

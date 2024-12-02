@@ -51,3 +51,18 @@ export const isValidUser = (userObject) => {
   let traeLlavesValidas = llavesObjeto.every(llave => llavesUsuario.includes(llave))
   return traeLlavesValidas
 }
+
+export const isValidDisc = (disco) => {
+  /**
+   * titulo, anio, canciones, sello, formato
+   */
+  let llavesPermitidas = [ "titulo", "anio", "canciones", "sello", "formato" ]
+  let llaves = Object.keys(disco)
+
+  let traeLlavesValidas = llaves.every(llave => llavesPermitidas.includes(llave))
+  
+  let anioActual = (new Date()).getFullYear()
+  let anioDiscoValida = disco.anio <= anioActual
+
+  return traeLlavesValidas && anioDiscoValida
+}

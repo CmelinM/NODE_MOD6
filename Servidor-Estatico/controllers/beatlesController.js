@@ -7,33 +7,58 @@ import * as crypto from 'node:crypto'
 import * as url from "node:url"
 
 export const beatlesController = async (req, res, payloadBruto, urlparts) => {
-  let queryObject = url.parse(req.url)
+  // let url = new URL(req.url, `https://${req.headers.host}`)
+  // let queryParams = url.searchParams
+  const queryParams = url.parse(req.url, true);
+
   /**
    * Listar todos los discos
    * /api/beatles /....
    */
-  if(req.method == 'GET' && !urlparts[2] && !queryString) {
+  if(req.method == 'GET' && !urlparts[2] && !queryParams.search) {
     try {
       let discos = await BeatlesModel.getAll()
   
       res.writeHead(200, 'OK', { "content-type": "application/json" })
-      res.end(JSON.stringify(discos))
+      return res.end(JSON.stringify(discos))
     } catch (err) {
       res.writeHead(500, 'Internal Server Error', { "content-type": "application/json" })
-      res.end(JSON.stringify({ message: err.message }))
+      return res.end(JSON.stringify({ message: err.message }))
     }
   }
-
-  else if(req.method == 'GET' && !urlparts[2] && queryString) {
-    let { nombre } = queryObject
-    console.log(nombre)
+  /**
+   * Con queryString
+   * /api/beatles?nombre=<nombre_disco>
+   */
+  else if(req.method == 'GET' && !urlparts[2] && queryParams.search) {
+    const  {nombre} = queryParams.query;
     const discos = await BeatlesModel.getAll()
 
+    let ids = Object.keys(discos)
+
+    for(let id of ids) {
+      let disco = discos[id]
+
+      if (!disco.titulo.toLowerCase().includes(nombre.toLocaleLowerCase())) {
+        delete discos[id]
+      }
+    }
+
+    let remainingKeys = Object.keys(discos)
+
+    if(remainingKeys.length == 0) {
+      res.writeHead(404, 'Not Found', { "content-type": "application/json" })
+      return res.end(JSON.stringify({ message: 'No se encontraron discos' }))
+    } else {
+      res.writeHead(200, 'OK', { "content-type": "application/json" })
+      return res.end(JSON.stringify(discos))
+    }
 
   }
   /**
    * Mostrar disco por ID
    * /api/beatles/:id
+   * /api/beatles/asd0aosud-qsdq1-1-sd
    */
   else if (req.method == 'GET' && urlparts[2] && urlparts.length <= 3 ) {
     let disco = await BeatlesModel.getById(urlparts[2])
@@ -47,17 +72,13 @@ export const beatlesController = async (req, res, payloadBruto, urlparts) => {
     }
   }
   /**
-   * Mostrar disco por nombre
-   */
-
-  /**
    * Crear discos
    * 
    * /api/beatles
    */
   else if(req.method == 'POST' && !urlparts[2]) {
     try {
-      let data = JSON.parse(payloadBruto)
+      let data = JSON.parse(payloadBruto) // Puede fallar y levantar un error
       let id = crypto.randomUUID()
 
       /**
@@ -114,8 +135,8 @@ export const beatlesController = async (req, res, payloadBruto, urlparts) => {
         return res.end(JSON.stringify({ message: 'Disco no encontrado' }))
       }
     } catch (err) {
-      res.writeHead(100, 'algo', { "content-type": "application/json" })
-      return res.end(JSON.stringify({ message: err.message }))
+      res.writeHead(500, 'Internal Server Error', { "content-type": "application/json" })
+      return res.end(JSON.stringify({ message: 'Error interno de servidor' }))
     }
   }
 
